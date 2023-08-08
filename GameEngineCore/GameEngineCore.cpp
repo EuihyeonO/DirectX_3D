@@ -10,6 +10,7 @@
 #include "GameEngineDevice.h"
 #include "GameEngineVideo.h"
 #include "GameEngineGUI.h"
+#include "GameEnginePhysics.h"
 
 GameEngineThreadJobQueue GameEngineCore::JobQueue;
 
@@ -53,6 +54,7 @@ void GameEngineCore::EngineStart(std::function<void()> _ContentsStart)
 	CoreResourcesInit();
 
 	GameEngineGUI::Initialize();
+	GameEnginePhysics::Initialize();
 
 	if (nullptr == _ContentsStart)
 	{
@@ -152,6 +154,7 @@ void GameEngineCore::EngineEnd(std::function<void()> _ContentsEnd)
 	CoreResourcesEnd();
 	Release();
 
+	GameEnginePhysics::Release();
 	GameEngineDevice::Release();
 	GameEngineWindow::Release();
 

@@ -1,13 +1,12 @@
 #include "PrecompileHeader.h"
 #include "GameEnginePhysics.h"
 
-physx::PxDefaultAllocator GameEnginePhysics::gAllocator;
-physx::PxDefaultErrorCallback GameEnginePhysics::gErrorCallback;
 
-physx::PxFoundation* GameEnginePhysics::foundation = nullptr;
-physx::PxPhysics* GameEnginePhysics::physics = nullptr;
-physx::PxMaterial* GameEnginePhysics::material = nullptr;
-physx::PxScene* GameEnginePhysics::scene = nullptr;
+physx::PxDefaultErrorCallback	GameEnginePhysics::m_ErrorCallback;
+physx::PxDefaultAllocator		GameEnginePhysics::m_Allocator;
+physx::PxFoundation*			GameEnginePhysics::m_pFoundation  =nullptr;
+physx::PxPhysics*				GameEnginePhysics::m_pPhysics     =nullptr;
+physx::PxScene*					GameEnginePhysics::m_pScene       =nullptr;
 
 GameEnginePhysics::GameEnginePhysics()
 {
@@ -19,28 +18,34 @@ GameEnginePhysics::~GameEnginePhysics()
 
 void GameEnginePhysics::Initialize()
 {
-	foundation = PxCreateFoundation(PX_PHYSICS_VERSION, gAllocator, gErrorCallback);
-	physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale());
-
-	material = physics->createMaterial(0.5f, 0.5f, 0.1f);
-
-	physx::PxSceneDesc sceneDesc(physics->getTolerancesScale());
-	sceneDesc.gravity = physx::PxVec3(0.0f, -9.81f, 0.0f);
-	scene = physics->createScene(sceneDesc);
+	m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_Allocator, m_ErrorCallback);
+	m_pPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, physx::PxTolerancesScale());
+	
+	physx::PxSceneDesc sceneDesc(m_pPhysics->getTolerancesScale());
+	sceneDesc.gravity = physx::PxVec3(0.0f, -9.81f, 0.0f); // 중력 설정
+	m_pScene = m_pPhysics->createScene(sceneDesc);
 }
-
-void GameEnginePhysics::Render(std::shared_ptr<class GameEngineLevel> Level, float _DeltaTime)
-{
-	physx::PxRigidDynamic* box = PxCreateDynamic(*physics, physx::PxTransform(physx::PxVec3(0, 10, 0)), physx::PxBoxGeometry(1, 1, 1), *material, 10.0f);
-
-	scene->addActor(*box);
-	scene->simulate(_DeltaTime);
-	scene->fetchResults(true);
-}
+//void GameEnginePhysics::Render(std::shared_ptr<class GameEngineLevel> Level, float _DeltaTime)
+//{
+//	physx::PxRigidDynamic* box = physx::PxCreateDynamic(*mphysics, physx::PxTransform(physx::PxVec3(0, 10, 0)), physx::PxBoxGeometry(1, 1, 1), *material, 10.0f);
+//
+//	scene->addActor(*box);
+//	scene->simulate(_DeltaTime);
+//	scene->fetchResults(true);
+//}
 
 void GameEnginePhysics::Release()
 {
-	scene->release();
-	physics->release();
-	foundation->release();
+	if (m_pScene !=nullptr)
+	{
+		m_pScene->release();
+	}
+	if (m_pPhysics != nullptr)
+	{
+		m_pPhysics->release();
+	}
+	if (m_pFoundation != nullptr)
+	{
+		m_pFoundation->release();
+	}
 }
