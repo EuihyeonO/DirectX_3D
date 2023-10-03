@@ -25,7 +25,7 @@ struct Output
 };
 
 
-Output ContentAniMeshDeferred_VS(Input _Input)
+Output ContentMeshDeferred_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
     
@@ -59,10 +59,10 @@ struct DeferredOutPut
 };
 
 
-DeferredOutPut ContentAniMeshDeferred_PS(Output _Input)
+DeferredOutPut ContentAMeshDeferred_PS(Output _Input)
 {
     DeferredOutPut NewOutPut = (DeferredOutPut) 0;
-    
+
     //UV°ª º¯°æ
     _Input.TEXCOORD.xy *= MulUV;
     _Input.TEXCOORD.xy += AddUV;

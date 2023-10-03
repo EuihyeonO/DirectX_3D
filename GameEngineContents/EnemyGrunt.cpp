@@ -12,8 +12,8 @@ EnemyGrunt::~EnemyGrunt()
 
 void EnemyGrunt::InitAniamtion()
 {
-	EnemyRenderer = CreateComponent<GameEngineFBXRenderer>();
-	EnemyRenderer->SetFBXMesh("_E_GRUNT_MESH.FBX", "MeshAniTexture");
+	EnemyRenderer = CreateComponent<ContentFBXRenderer>();
+	EnemyRenderer->SetFBXMesh("_E_GRUNT_MESH.FBX", "ContentAniMeshDeffered");
 
 	EnemyRenderer->CreateFBXAnimation("IDLE", "_E_GRUNT_IDLE.fbx", { 0.02f,true });
 	EnemyRenderer->CreateFBXAnimation("DROWN", "_E_GRUNT_DROWN.fbx", { 0.02f,false });

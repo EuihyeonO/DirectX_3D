@@ -48,7 +48,7 @@ cbuffer ColorOption : register(b0)
 }
 
 Texture2D DiffuseTex : register(t0);
-SamplerState SAMPLER : register(s0);
+SamplerState ENGINEBASE : register(s0);
 
 struct OutColor
 {
@@ -58,7 +58,7 @@ struct OutColor
 float4 ContentTexture_PS(OutPut _Value) : SV_Target0
 {
 
-    float4 Color = DiffuseTex.Sample(SAMPLER, _Value.UV.xy);
+    float4 Color = DiffuseTex.Sample(ENGINEBASE, _Value.UV.xy);
     
     Color *= MulColor;
     Color += PlusColor;

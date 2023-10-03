@@ -24,8 +24,10 @@ private:
 	void CreateKey();
 
 	void Render2Dto3D();
+	std::shared_ptr<GameEngineRenderTarget> NewTarget = nullptr;
+	GameEngineRenderUnit Unit;
+	std::shared_ptr<class ContentUIRenderer> Test1;
 
-	
 	std::shared_ptr<class ContentFBXRenderer> TestRd = nullptr;
 
 };

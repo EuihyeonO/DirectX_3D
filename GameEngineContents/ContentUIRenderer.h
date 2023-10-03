@@ -18,7 +18,6 @@ public:
 	{
 		UVData = _Data;
 	}
-
 protected:
 	void Start() override;
 

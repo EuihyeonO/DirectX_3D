@@ -499,6 +499,7 @@ void GameEngineLevel::InitLevelRenderTarget()
 	FXAATarget->AddNewTexture(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
 	FXAAUnit.SetMesh("FullRect");
 	FXAAUnit.SetMaterial("FXAA");
+
 	FXAAUnit.ShaderResHelper.SetTexture("ScreenTexture", LastTarget->GetTexture(0));
 	
 }

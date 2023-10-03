@@ -11,8 +11,8 @@ EnemyGhoul::~EnemyGhoul()
 
 void EnemyGhoul::InitAniamtion()
 {
-	EnemyRenderer = CreateComponent<GameEngineFBXRenderer>();
-	EnemyRenderer->SetFBXMesh("_E_GHOUL_MESH.FBX", "MeshAniTexture");
+	EnemyRenderer = CreateComponent<ContentFBXRenderer>();
+	EnemyRenderer->SetFBXMesh("_E_GHOUL_MESH.FBX", "ContentAniMeshDeffered");
 
 	EnemyRenderer->CreateFBXAnimation("IDLE_BOW", "_E_GHOUL_IDLE_BOW.fbx", { 0.02f,true });
 

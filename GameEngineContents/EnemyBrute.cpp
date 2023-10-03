@@ -12,8 +12,8 @@ EnemyBrute::~EnemyBrute()
 
 void EnemyBrute::InitAniamtion()
 {
-	EnemyRenderer = CreateComponent<GameEngineFBXRenderer>();
-	EnemyRenderer->SetFBXMesh("_E_BRUTE_MESH.FBX", "MeshAniTexture");
+	EnemyRenderer = CreateComponent<ContentFBXRenderer>();
+	EnemyRenderer->SetFBXMesh("_E_BRUTE_MESH.FBX", "ContentAniMeshDeffered");
 
 	EnemyRenderer->CreateFBXAnimation("IDLE", "_E_BRUTE_IDLE.fbx", { 0.02f,true });
 	EnemyRenderer->CreateFBXAnimation("WALK", "_E_BRUTE_WALK.fbx", { 0.02f,false });

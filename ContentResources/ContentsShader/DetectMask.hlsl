@@ -64,6 +64,10 @@ OutPutTarget DetectMask_PS(OutPut _Value)
     
     OutPut.DiffuseTarget = DiffuseColor;
     
+    DifLight *= DiffuseColor;
+    SpcLight *= DiffuseColor;
+    AmbLight *= DiffuseColor;
+    
     OutPut.DifLightTarget = DifLight * Intensity.x;
     OutPut.SpcLightTarget = SpcLight * Intensity.y;
     OutPut.AmbLightTarget = AmbLight * Intensity.z;

@@ -60,7 +60,6 @@ void Player::Update(float _DeltaTime)
 	FSMObjectBase::Update(_DeltaTime);
 	DefaultPhysX();
 
-
 	// input 사다리타기 추후 trigger로 변경할 예정
 	if (true == GameEngineInput::IsDown("PressN"))
 	{

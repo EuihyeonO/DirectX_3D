@@ -475,8 +475,11 @@ void GameEngineFBXRenderer::CalculateUnitPos()
 	float4 f4MaxPos = float4::ZERO;
 	float4 f4Scale = float4::ZERO;
 	float4 ResultPos = float4::ZERO;
-	float4 Quat = Quat.EulerDegToQuaternion();
+	float4 Quat;
+	Quat.EulerDegToQuaternion();
+
 	float4x4 RenderUnitMat = float4x4::Zero;
+
 	for (size_t i = 0; i < Unit.size(); i++)
 	{
 		f4MinPos = FBXMesh->GetRenderUnit(i)->MinBoundBox;

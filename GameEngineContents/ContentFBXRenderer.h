@@ -36,7 +36,7 @@ protected:
 private:
 	void LinkBlurColor();
 
-	float4 BlurColor = {0.8f, 0.5f, 0.9f};
+	float4 BlurColor = {1.0f, 0.1f, 0.2f};
 	std::string MaterialName;
 };
 

@@ -21,13 +21,14 @@ public:
 
 	std::shared_ptr<GameEngineRenderTarget> DetectMaskTarget = nullptr;
 	std::shared_ptr<GameEngineRenderTarget> BlurTarget = nullptr;
+	std::shared_ptr<GameEngineRenderTarget> DoubleBlurTarget = nullptr;
 
 	void SetIntensity(float _Intensity)
 	{
-		Intensity.x = _Intensity;
+		//Intensity.x = _Intensity;
 		Intensity.y = _Intensity;
-		Intensity.z = _Intensity;
-		Intensity.w = _Intensity;
+		//Intensity.z = _Intensity;
+		//Intensity.w = _Intensity;
 	}
 
 	void Init(std::weak_ptr<GameEngineLevel> _Level, float _Intensity)

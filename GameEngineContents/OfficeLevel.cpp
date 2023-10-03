@@ -4,6 +4,7 @@
 #include "Map_Office.h"
 #include "Player.h"
 #include "PhysXCapsuleComponent.h"
+#include "GlowEffect.h"
 
 OfficeLevel::OfficeLevel()
 {
@@ -17,6 +18,12 @@ void OfficeLevel::Start()
 {
 	SetLevelType(PacketLevelType::OfficeLevel);
 	InitKey();
+
+	CreateNewCamera(50);
+	GetCamera(50)->SetProjectionType(CameraType::Perspective);
+
+	std::shared_ptr<GlowEffect> Effect = GetMainCamera()->GetDeferredLightTarget()->CreateEffect<GlowEffect>();
+	Effect->Init(DynamicThis<GameEngineLevel>(), 5.0f);
 }
 
 void OfficeLevel::Update(float _DeltaTime)
@@ -38,6 +45,8 @@ void OfficeLevel::LevelChangeStart()
 	GetMainCamera()->GetTransform()->SetLocalRotation(m_CameraRot);
 	GetMainCamera()->GetTransform()->SetLocalPosition(m_CameraPos);
 
+	GetCamera(50)->GetTransform()->SetLocalPosition(m_CameraPos);
+	GetCamera(50)->GetTransform()->SetLocalRotation(m_CameraRot);
 
 	std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
 	Light->GetTransform()->SetLocalRotation(float4{ 60, 0, 0 });

@@ -3,6 +3,7 @@
 
 #include "StaticParticleManager.h"
 #include "Player.h"
+#include "ContentUIRenderer.h"
 
 MyTest::MyTest()
 {
@@ -14,11 +15,32 @@ MyTest::~MyTest()
 
 void MyTest::Start()
 {
+	Test1 = CreateComponent<ContentUIRenderer>();
+	Test1->SetMaterial("Content2DTexture");
+	Test1->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -10.0f });
+
+	std::shared_ptr<ContentUIRenderer> Test = CreateComponent<ContentUIRenderer>();
+	Test->SetScaleToTexture("Character.png");
+	Test->GetTransform()->SetLocalScale({ 450.0f, 450.0f, 0.0f });
+
+	NewTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, {180, 180}, float4::ZERONULL);
+	//
+
+	Unit.SetMesh("FullRect");
+	Unit.SetMaterial("Blur");
+	Unit.ShaderResHelper.SetTexture("DiffuseTex", GameEngineTexture::Find("CharacterMask.png"));
+	Unit.SetUnitScale({ 180.0f,180.0f });
+
+
+
+	//est1->GetShaderResHelper().SetTexture("DiffuseTex", NewTarget->GetTexture(0));
+	//est1->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -10.0f });
+
 	//GetLevel()->CreateActor<Player>();
 		
-	TestRd = CreateComponent<ContentFBXRenderer>();
-	TestRd->SetFBXMesh("Sphere.fbx", "ContentAniMeshDeffered");
-	TestRd->GetTransform()->SetLocalScale({ 10.0f, 10.0f, 10.0f });
+	//TestRd = CreateComponent<ContentFBXRenderer>();
+	//TestRd->SetFBXMesh("Sphere.fbx", "ContentAniMeshDeffered");
+	//TestRd->GetTransform()->SetLocalScale({ 10.0f, 10.0f, 10.0f });
 
 	//
 	//TestRd->GetTransform()->SetLocalScale({ 50.0f, 50.0f, 50.0f });
@@ -27,21 +49,28 @@ void MyTest::Start()
 	//TestRd->CreateFBXAnimation("Fly", "_E_BAT_Black Variant_FLY.fbx");
 	//TestRd->ChangeAnimation("Fly");
 
-	auto Units = TestRd->GetAllRenderUnit();
-	
-	for (int i = 0; i < Units.size(); i++)
-	{
-		for (int j = 0; j < Units[i].size(); j++)
-		{
-			Units[i][j]->ShaderResHelper.SetTexture("MaskTexture", "WhiteTexture.png");
-			Units[i][j]->Mask.UV_MaskingValue += 1.0f;
-		}
-	}
+	//auto Units = TestRd->GetAllRenderUnit();
+	//
+	//for (int i = 0; i < Units.size(); i++)
+	//{
+	//	for (int j = 0; j < Units[i].size(); j++)
+	//	{
+	//		Units[i][j]->ShaderResHelper.SetTexture("MaskTexture", "WhiteTexture.png");
+	//		Units[i][j]->Mask.UV_MaskingValue += 1.0f;
+	//	}
+	//}
 }
 
 void MyTest::Update(float _Delta)
 {
+	NewTarget->Clear();
+	NewTarget->Setting();
 
+	Unit.Render(0.0f);
+	
+	Test1->GetShaderResHelper().AllResourcesReset();
+	Test1->GetShaderResHelper().SetTexture("DiffuseTex", NewTarget->GetTexture(0));
+	Test1->GetTransform()->SetLocalScale({ 450.0f, 450.0f });
 }
 
 void MyTest::TestRender()

@@ -14,8 +14,8 @@ EnemyBat::~EnemyBat()
 
 void EnemyBat::InitAniamtion()
 {
-	EnemyRenderer = CreateComponent<GameEngineFBXRenderer>();
-	EnemyRenderer->SetFBXMesh("_E_BAT_Black Variant_MESH.FBX", "MeshAniTexture");
+	EnemyRenderer = CreateComponent<ContentFBXRenderer>();
+	EnemyRenderer->SetFBXMesh("_E_BAT_Black Variant_MESH.FBX", "ContentAniMeshDeffered");
 
 	EnemyRenderer->CreateFBXAnimation("IDLE", "_E_BAT_Black Variant_IDLE.fbx", { 0.02f,true });
 	//EnemyRenderer->CreateFBXAnimation("FLY", "_E_BAT_Black Variant_FLY.fbx", { 0.02f,true });

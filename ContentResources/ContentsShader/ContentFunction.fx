@@ -45,7 +45,7 @@ float4 Fading(Texture2D _MaskTexture, SamplerState _Sampler, float2 _UV)
             
             if (CurFliterColor.r <= Delta)
             {
-                Color.rgb = float3(1.0f, 0.0f, 1.0f);
+                Color.rgb = float3(0.0f, 1.0f, 1.0f);
                 break;
             }
     

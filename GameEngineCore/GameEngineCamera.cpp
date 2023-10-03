@@ -485,8 +485,14 @@ void GameEngineCamera::CameraTransformUpdate()
 		float4 Dir = GetTransform()->GetLocalForwardVector();
 		float4 WorldPos = GetTransform()->GetWorldPosition();
 		//WorldPos.y = -WorldPos.y;
+
 		Frustum.CreateFromMatrix(Frustum,Projection);
-		Frustum.Origin = (WorldPos).DirectFloat3;
+
+		Frustum.Orientation = GetTransform()->GetWorldRotation().EulerDegToQuaternion().DirectFloat4;
+		Frustum.Origin = WorldPos.DirectFloat3;
+		Frustum.Near = Near;
+		Frustum.Far = Far;
+
 		//Frustum.Near = Near;
 		//Frustum.Far = Far;
 		//Frustum.LeftSlope = -(FOV * GameEngineMath::DegToRad) * 0.7f;
@@ -494,7 +500,6 @@ void GameEngineCamera::CameraTransformUpdate()
 		//Frustum.TopSlope = (FOV / (Width / Height) * GameEngineMath::DegToRad) * 0.7f;
 		//Frustum.BottomSlope = -(FOV / (Width / Height) * GameEngineMath::DegToRad) * 0.7f;
 
-		Frustum.Orientation = GetTransform()->GetWorldQuaternion().DirectFloat4;
 		break;
 	}
 	case CameraType::Orthogonal:
@@ -575,6 +580,8 @@ bool GameEngineCamera::IsView(const TransformData& _TransData)
 
 		bool IsCal = Frustum.Intersects(Sphere);
 
+
+		
 		return IsCal;
 
 		break;
@@ -620,6 +627,13 @@ bool GameEngineCamera::IsView(const float4& _Pos, const float4& _Scale)
 		DirectX::BoundingSphere Sphere;
 		Sphere.Center = _Pos.DirectFloat3;
 		Sphere.Radius = _Scale.MaxFloat() * 0.5f;
+		
+		DirectX::ContainmentType Type = Frustum.Contains(Sphere);
+		
+		if (Type == DirectX::ContainmentType::DISJOINT)
+		{
+			int a = 0;
+		}
 
 		bool IsCal = Frustum.Intersects(Sphere);
 

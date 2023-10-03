@@ -71,7 +71,6 @@ cbuffer BlurColor : register(b1)
     float4 BlurColor;
 }
 
-
 DeferredOutPut ContentAniMeshDeferred_PS(Output _Input)
 {
     DeferredOutPut NewOutPut = (DeferredOutPut) 0;

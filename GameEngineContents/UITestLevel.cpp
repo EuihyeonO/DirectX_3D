@@ -24,6 +24,9 @@ void UITestLevel::Start()
 {
 	GetMainCamera()->SetProjectionType(CameraType::Perspective);
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -50.0f });
+	GetMainCamera()->SetSortType(100, SortType::ZSort);
+	GetMainCamera()->SetSortType(0, SortType::ZSort);
+
 	//GetMainCamera()->GetTransform()->SetLocalPosition({ 0.0f, 600.0f, -1000.0f });
 	//GetMainCamera()->GetTransform()->SetLocalRotation({ 45.0f, 0.0f, 0.0f });
 

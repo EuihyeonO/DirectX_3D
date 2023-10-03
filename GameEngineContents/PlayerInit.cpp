@@ -31,8 +31,13 @@ void Player::InitInputKey()
 
 void Player::InitPlayerAnimation()
 {
-	Renderer = CreateComponent<GameEngineFBXRenderer>();
-	Renderer->SetFBXMesh("PLAYER_MESH.FBX", "MeshAniTexture");
+	Renderer = CreateComponent<ContentFBXRenderer>();
+	Renderer->SetFBXMesh("PLAYER_MESH.FBX", "ContentAniMeshDeffered");
+	
+	auto units = Renderer->GetAllRenderUnit();
+	units[0][1]->Mask.UV_MaskingValue = 1.0f;
+
+
 	//idle
 	Renderer->CreateFBXAnimation("IDLE0", "PLAYER_IDLE_0.FBX", { 0.02f,false });
 	Renderer->CreateFBXAnimation("IDLE1", "PLAYER_IDLE_1.FBX", { 0.01f,false });

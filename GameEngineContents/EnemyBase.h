@@ -23,7 +23,7 @@ public:
 	}
 
 protected:
-	std::shared_ptr<class GameEngineFBXRenderer> EnemyRenderer = nullptr;
+	std::shared_ptr<class ContentFBXRenderer> EnemyRenderer = nullptr;
 	std::shared_ptr<class PhysXCapsuleComponent> m_pCapsuleComp = nullptr;
 
 	virtual void InitAniamtion() {};

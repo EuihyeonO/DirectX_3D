@@ -18,6 +18,7 @@ void ContentUIRenderer::Start()
 	Unit->SetMesh("Rect");
 	Unit->SetMaterial("Content2DTexture");
 
+
 	AtlasData.x = 0.0f;
 	AtlasData.y = 0.0f;
 	AtlasData.z = 1.0f;

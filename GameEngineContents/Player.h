@@ -75,7 +75,7 @@ private:
 
 	// Component
 		// Render
-	std::shared_ptr<GameEngineFBXRenderer> Renderer = nullptr;
+	std::shared_ptr<ContentFBXRenderer> Renderer = nullptr;
 		//physx
 	std::shared_ptr<class PhysXCapsuleComponent> m_pCapsuleComp = nullptr;
 		//Range
