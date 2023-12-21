@@ -24,7 +24,6 @@ struct Output
     float4 NORMAL : NORMAL;
 };
 
-
 Output ContentAniMeshDeferred_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
@@ -93,6 +92,19 @@ DeferredOutPut ContentAniMeshDeferred_PS(Output _Input)
     Color *= MulColor;
     Color += AddColor;
     
+    //Fade
+    float4 FadeMask = MaskTexture.Sample(ENGINEBASE, _Input.TEXCOORD.xy);
+
+    if (Delta > 0.0f && FadeMask.r <= Delta)
+    {
+        clip(-1);
+    }
+    
+    if (FadeMask.r > Delta && FadeMask.r <= Delta * 1.1f)
+    {
+        Color = float4(FadeColor.r, FadeColor.g, FadeColor.b, 1.0f);
+    }
+    
     //Crack
     if (UV_MaskingValue > 0.0f && _Input.TEXCOORD.x <= UV_MaskingValue && _Input.TEXCOORD.y <= UV_MaskingValue)
     {
@@ -107,20 +119,6 @@ DeferredOutPut ContentAniMeshDeferred_PS(Output _Input)
     if (Color.a <= 0.0f)
     {
         clip(-1);
-    }
-    
-    
-    //Fade
-    float4 FadeMask = MaskTexture.Sample(ENGINEBASE, _Input.TEXCOORD.xy);
-
-    if (Delta > 0.0f && FadeMask.r <= Delta)
-    {
-        clip(-1);
-    }
-    
-    if (FadeMask.r > Delta && FadeMask.r <= Delta * 1.1f)
-    {
-        Color = float4(FadeColor.r, FadeColor.g, FadeColor.b , 1.0f);
     }
 
     NewOutPut.DifTarget = Color;

@@ -63,10 +63,9 @@ void OldCrowLevel::LevelChangeEnd()
 
 void OldCrowLevel::Create_Light()
 {
-
 	std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
-	Light->GetTransform()->SetLocalRotation(float4{ 20, 180, 0 });
-
+	Light->GetTransform()->SetLocalRotation(float4{30, 180, 0 }); 
+	Light->GetTransform()->AddLocalPosition({ 0.0f, 0.0f, 4000.0f });
 }
 
 void OldCrowLevel::Create_Map()

@@ -93,7 +93,7 @@ bool EnemyBase::CheckHit()
 		--m_iEnemyHP;
 		float Crack = static_cast<float>(m_TotalHP-m_iEnemyHP) / m_TotalHP; // 몬스터에 크랙쉐이더 적용 0~1값
 		EnemyRenderer->SetCrackAmount(Crack);		
-		EnemyRenderer->SetCrackColor({ 0.952f, 0.286f, 0.372f, 1.0f }, 1 + Crack * 5.0f);
+		EnemyRenderer->SetCrackColor({ 0.952f, 0.286f, 0.372f, 1.0f }, 1 + Crack * 10.0f);
 		return true;
 	}
 	return false;

@@ -8,8 +8,9 @@ void Boss_OldCrow::InitAnimation()
 {
 	EnemyRenderer = CreateComponent<ContentFBXRenderer>();
 
-	EnemyRenderer->SetFBXMesh("OldCrow.FBX", "ContentAniMeshForward");
+	EnemyRenderer->SetFBXMesh("OldCrow.FBX", "ContentAniMeshDeffered");
 	EnemyRenderer->CreateFBXAnimation("Idle", "OldCrow_Idle_Anim.FBX", { 0.033f, true });
+	EnemyRenderer->ShadowOn();
 
 	EnemyRenderer->CreateFBXAnimation("DashStart", "OldCrow_DashStart_Anim.FBX", { 0.02f, false });
 	EnemyRenderer->CreateFBXAnimation("Dash", "OldCrow_Dash_Anim.FBX", { 0.033f, true });
